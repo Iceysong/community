@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
@@ -50,14 +51,13 @@ public class AuthorizeController {
         if (githubUser!=null){
             User user = new User();
             user.setName(githubUser.getLogin());
-            user.setToken(UUID.randomUUID().toString());
+            String token = UUID.randomUUID().toString();
+            user.setToken(token);
             user.setAccountId(String.valueOf(githubUser.getId()));
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
             userMapper.insert(user);
-            //登陆成功，写cookie和session
-            request.getSession().setAttribute("user",githubUser);
-
+            response.addCookie(new Cookie("token",token));
             //使用redirect前缀，会把地址全部去掉，重定向到index
             return "redirect:/";
         }else{
