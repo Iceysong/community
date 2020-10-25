@@ -2,6 +2,7 @@ package life.majiang.community.community.provider;
 
 import com.alibaba.fastjson.JSON;
 import life.majiang.community.community.dto.AccessTokenDto;
+import life.majiang.community.community.dto.GithubUser;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
 
@@ -39,7 +40,7 @@ public class GithubProvider {
     public GithubUser getUser(String accessToken){
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("https://api.github.com/user?access_token=" + "0b10a7154d007027400cd84ede44c1cb52cfcc43")
+                .url("https://api.github.com/user?access_token=" + "824f04413151fed5ade910f900160692c586e22d")
                 .build();
         try {
             Response response = client.newCall(request).execute();

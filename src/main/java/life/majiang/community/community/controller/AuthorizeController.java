@@ -4,7 +4,7 @@ import life.majiang.community.community.dto.AccessTokenDto;
 import life.majiang.community.community.mapper.UserMapper;
 import life.majiang.community.community.model.User;
 import life.majiang.community.community.provider.GithubProvider;
-import life.majiang.community.community.provider.GithubUser;
+import life.majiang.community.community.dto.GithubUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -48,7 +48,7 @@ public class AuthorizeController {
         String accessToken = githubProvider.getAccessToken(accessTokenDto);
         GithubUser githubUser = githubProvider.getUser(accessToken);
         System.out.println(githubUser.getLogin());
-        if (githubUser!=null){
+        if (githubUser!=null && githubUser.getId()!=null){
             User user = new User();
             user.setName(githubUser.getLogin());
             String token = UUID.randomUUID().toString();
@@ -56,6 +56,7 @@ public class AuthorizeController {
             user.setAccountId(String.valueOf(githubUser.getId()));
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
+            user.setAvatarUrl(githubUser.getAvatar_url());
             userMapper.insert(user);
             response.addCookie(new Cookie("token",token));
             //使用redirect前缀，会把地址全部去掉，重定向到index
