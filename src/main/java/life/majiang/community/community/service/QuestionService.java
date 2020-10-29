@@ -31,11 +31,11 @@ public class QuestionService {
         }else{
             totalPage = totalCount / size + 1;
         }
-        if (page < 1){
-            page = 1;
-        }
         if (page > totalPage){
             page = totalPage;
+        }
+        if (page < 1){
+            page = 1;
         }
         PaginationDTO paginationDTO = new PaginationDTO();
         paginationDTO.setPagination(totalPage,page);
@@ -62,11 +62,11 @@ public class QuestionService {
         }else{
             totalPage = totalCount / size + 1;
         }
-        if (page < 1){
-            page = 1;
-        }
         if (page > totalPage){
             page = totalPage;
+        }
+        if (page < 1){
+            page = 1;
         }
         PaginationDTO paginationDTO = new PaginationDTO();
         paginationDTO.setPagination(totalPage,page);
@@ -84,4 +84,12 @@ public class QuestionService {
     }
 
 
+    public QuestionDTO getById(Integer id) {
+        QuestionDTO questionDTO = new QuestionDTO();
+        Question question = questionMapper.getById(id);
+        User user = userMapper.findById(question.getCreator());
+        BeanUtils.copyProperties(question,questionDTO);
+        questionDTO.setUser(user);
+        return questionDTO;
+    }
 }
