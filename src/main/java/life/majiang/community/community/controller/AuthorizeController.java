@@ -1,7 +1,6 @@
 package life.majiang.community.community.controller;
 
 import life.majiang.community.community.dto.AccessTokenDto;
-import life.majiang.community.community.mapper.UserMapper;
 import life.majiang.community.community.model.User;
 import life.majiang.community.community.provider.GithubProvider;
 import life.majiang.community.community.dto.GithubUser;

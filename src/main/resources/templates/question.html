@@ -22,13 +22,13 @@
             </span>
                 <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 top-header"
+               <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 top-header"
                      th:if="${!#lists.isEmpty(#httpServletRequest.getServletContext().getAttribute('HEADER'))}"
                      th:each="ad : ${#httpServletRequest.getServletContext().getAttribute('HEADER')}">
                     <a th:href="${ad.url}" th:text="${ad.title}" target="_blank"
                        style="color: #A00;font-weight: bold;"></a>
                     <img src="/images/hot.png"/>
-                </div>
+                </div>-->
 
                 <!--内容-->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="question-view">
@@ -40,12 +40,12 @@
                     });
                 </script>
 
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+             <!--   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
                      th:if="${!#lists.isEmpty(#httpServletRequest.getServletContext().getAttribute('FOOTER'))}"
                      th:each="ad : ${#httpServletRequest.getServletContext().getAttribute('FOOTER')}">
                     <a th:href="${ad.url}" th:text="${ad.title}" target="_blank"
                        style="color: #A00;font-weight: bold;"></a>
-                </div>
+                </div>-->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="width: 100%;"
                      th:if="${#lists.isEmpty(#httpServletRequest.getServletContext().getAttribute('FOOTER'))}">
                     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -82,7 +82,7 @@
             </div>
 
             <!--回复-->
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+           <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h4>
                     <span th:text="${question.commentCount}"></span> 个回复
                 </h4>
@@ -110,7 +110,7 @@
                                 <span class="pull-right"
                                       th:text="${#dates.format(comment.gmtCreate,'yyyy-MM-dd')}"></span>
                             </div>
-                            <!--二级评论-->
+                            &lt;!&ndash;二级评论&ndash;&gt;
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 collapse sub-comments"
                                  th:id="${'comment-'+comment.id}">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -124,7 +124,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
 
             <!--回复输入框-->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -179,9 +179,9 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h4>相关问题</h4>
                 <ul class="question-related">
-                    <li th:each="related : ${relatedQuestions}">
+                    <!--<li th:each="related : ${relatedQuestions}">
                         <a th:href="@{'/question/'+ ${related.id}}" th:text="${related.title}"></a>
-                    </li>
+                    </li>-->
                 </ul>
             </div>
         </div>
