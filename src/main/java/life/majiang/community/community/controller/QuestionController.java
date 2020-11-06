@@ -2,6 +2,7 @@ package life.majiang.community.community.controller;
 
 import life.majiang.community.community.dto.CommentDTO;
 import life.majiang.community.community.dto.QuestionDTO;
+import life.majiang.community.community.enums.CommentTypeEnum;
 import life.majiang.community.community.exception.CustomizeErrorCode;
 import life.majiang.community.community.exception.CustomizeException;
 import life.majiang.community.community.service.CommentService;
@@ -37,7 +38,7 @@ public class QuestionController {
             throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
         }
 
-        List<CommentDTO> comments = commentService.listByQuestionId(id);
+        List<CommentDTO> comments = commentService.listByTargetId(id, CommentTypeEnum.QUESTION);
         model.addAttribute("question",questionDTO);
         model.addAttribute("comments",comments);
         return "question";
