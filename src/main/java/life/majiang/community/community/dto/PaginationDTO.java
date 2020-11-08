@@ -8,8 +8,8 @@ import java.util.List;
  * @author song
  */
 @Data
-public class PaginationDTO {
-    private List<QuestionDTO> data;
+public class PaginationDTO<T> {
+    private List<T> data;
     private boolean showPrevious;
     private boolean showFirstPage;
     private boolean showNext;
