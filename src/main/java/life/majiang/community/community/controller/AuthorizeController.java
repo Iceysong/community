@@ -1,6 +1,6 @@
 package life.majiang.community.community.controller;
 
-import life.majiang.community.community.dto.AccessTokenDto;
+import life.majiang.community.community.dto.AccessTokenDTO;
 import life.majiang.community.community.model.User;
 import life.majiang.community.community.provider.GithubProvider;
 import life.majiang.community.community.dto.GithubUser;
@@ -38,7 +38,7 @@ public class AuthorizeController {
     public String callback(@RequestParam(name = "code") String code,
                            @RequestParam(name = "state") String state,
                            HttpServletResponse response){
-        AccessTokenDto accessTokenDto = new AccessTokenDto();
+        AccessTokenDTO accessTokenDto = new AccessTokenDTO();
         accessTokenDto.setClient_id(clienctId);
         accessTokenDto.setClient_secret(clientSecret);
         accessTokenDto.setCode(code);
