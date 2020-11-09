@@ -1,7 +1,7 @@
 package life.majiang.community.community.provider;
 
 import com.alibaba.fastjson.JSON;
-import life.majiang.community.community.dto.AccessTokenDto;
+import life.majiang.community.community.dto.AccessTokenDTO;
 import life.majiang.community.community.dto.GithubUser;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ public class GithubProvider {
      * @param accessTokenDto
      * @return
      */
-    public String getAccessToken(AccessTokenDto accessTokenDto){
+    public String getAccessToken(AccessTokenDTO accessTokenDto){
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
         OkHttpClient client = new OkHttpClient();
         RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(accessTokenDto));

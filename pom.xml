@@ -106,6 +106,13 @@
             <optional>true</optional>
         </dependency>
 
+        <!--UCloud US3 (原名UFile) SDK for Java-->
+        <dependency>
+            <groupId>cn.ucloud.ufile</groupId>
+            <artifactId>ufile-client-java</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+
     </dependencies>
 
     <build>
