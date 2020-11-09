@@ -23,9 +23,19 @@ public class UCloudProvider {
 
     @Value("${ucloud.ufile.private-key}")
     private String privateKey;
-    // 对象操作需要ObjectConfig来配置您的地区和域名后缀
-    ObjectConfig config = new ObjectConfig("your bucket region", "ufileos.com");
-    private String mawen = "mawen";
+
+    @Value("${ucloud.ufile.bucket-name}")
+    private String bucketName;
+
+    @Value("${ucloud.ufile.region:cn-bj}")
+    private String region;
+
+    @Value("${ucloud.ufile.suffix}")
+    private String suffix;
+
+    @Value("${ucloud.ufile.expires}")
+    private Integer expires;
+
 
     public String upload(InputStream fileStream, String mimeType, String fileName){
         String generatedName;
@@ -38,10 +48,13 @@ public class UCloudProvider {
         try {
             // Bucket相关API的授权器
             ObjectAuthorization objectAuthorization = new UfileObjectLocalAuthorization(publicKey, privateKey);
+            // 对象操作需要ObjectConfig来配置您的地区和域名后缀
+            ObjectConfig config = new ObjectConfig(region, suffix);
+
             PutObjectResultBean response = UfileClient.object(objectAuthorization, config)
                     .putObject(fileStream, mimeType)
                     .nameAs(generatedName)
-                    .toBucket(mawen)
+                    .toBucket(bucketName)
                     /**
                      * 是否上传校验MD5, Default = true
                      */
@@ -59,7 +72,7 @@ public class UCloudProvider {
                     if (response != null && response.getRetCode()==0){
                         //设置有效期时间
                         String url = UfileClient.object(objectAuthorization, config)
-                                .getDownloadUrlFromPrivateBucket(fileName, mawen, 24 * 60 * 60)
+                                .getDownloadUrlFromPrivateBucket(fileName, bucketName, expires)
                                 .createUrl();
                         return url;
                     }else {
