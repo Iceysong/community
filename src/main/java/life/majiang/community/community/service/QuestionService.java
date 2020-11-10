@@ -58,7 +58,8 @@ public class QuestionService {
         }
         PaginationDTO paginationDTO = new PaginationDTO();
         paginationDTO.setPagination(totalPage,page);
-        questionQueryDTO.setPage(page);
+        Integer offset = page<1?0:(page-1)*size;
+        questionQueryDTO.setPage(offset);
         questionQueryDTO.setSize(size);
         List<Question> questions = questionExtMapper.selectBySearch(questionQueryDTO);
         for (Question question:questions){
@@ -92,7 +93,7 @@ public class QuestionService {
         }
         PaginationDTO paginationDTO = new PaginationDTO<>();
         paginationDTO.setPagination(totalPage,page);
-        Integer offset = (page-1)*size;
+        Integer offset = page<1?0:(page-1)*size;
         List<Question> questions = questionMapper.selectByExampleWithRowbounds(questionExample, new RowBounds(offset, size));
         for (Question question:questions){
             QuestionDTO questionDTO = new QuestionDTO();
