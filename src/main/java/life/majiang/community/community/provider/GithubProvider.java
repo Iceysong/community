@@ -40,15 +40,12 @@ public class GithubProvider {
     public GithubUser getUser(String accessToken){
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("https://api.github.com/user?access_token=" + "3298af8d3ae925d41d59d9e04d47f5dd74f98bb5")
+                .url("https://api.github.com/user")
+                .header("Authorization","token "+accessToken)
                 .build();
         try {
             Response response = client.newCall(request).execute();
             String string = response.body().string();
-            //TODO 先把accessToken写死
-            //返回错误提示：{"message":"Bad credentials","documentation_url":"https://docs.github.com/rest"}
-            //应该是获取的access_token无效
-            //网页访问https://api.github.com/user?access_token=e819546c9588b30904517052f65a925741d8a950
             System.out.println(string);
             GithubUser githubUser = JSON.parseObject(string, GithubUser.class);
             return githubUser;
