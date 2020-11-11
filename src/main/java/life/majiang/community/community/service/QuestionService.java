@@ -34,14 +34,16 @@ public class QuestionService {
     @Autowired
     private QuestionExtMapper questionExtMapper;
 
-    public PaginationDTO list(String search,Integer page, Integer size) {
+    public PaginationDTO list(String search,String tag,Integer page, Integer size) {
         QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
         if (StringUtils.isNotBlank(search)){
             String[] tags = StringUtils.split(search, " ");
             search = Arrays.stream(tags).collect(Collectors.joining("|"));
             questionQueryDTO.setSearch(search);
         }
-
+        if (StringUtils.isNotBlank(tag)){
+            questionQueryDTO.setTag(tag);
+        }
         List<QuestionDTO> dtoList = new ArrayList<>();
         Integer totalCount = questionExtMapper.countBySearch(questionQueryDTO);
         Integer totalPage;
